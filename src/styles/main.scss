@@ -1,5 +1,7 @@
 $day-size: 100px;
 $gap: 1px;
+$border-width: 1px;
+$container-padding: 10px;
 
 body {
   margin: 0;
@@ -10,10 +12,11 @@ body {
 }
 
 .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, $day-size);
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
   gap: $gap;
-  padding: 10px;
+  padding: $container-padding;
   width: calc($day-size * 7 + $gap * 6);
 
   &__day {
@@ -25,7 +28,7 @@ body {
     background-color: #eee;
     height: $day-size;
     width: $day-size;
-    border: 1px solid black;
+    border: $border-width solid black;
     transition: 500ms;
   }
 
@@ -54,18 +57,30 @@ body {
 }
 
 $start-day: (
-  mon: 1,
-  tue: 2,
-  wed: 3,
-  thu: 4,
-  fri: 5,
-  sat: 6,
-  sun: 7,
+  mon: 0,
+  tue: (
+    $day-size + $gap,
+  ),
+  wed: (
+    2 * ($day-size + $gap),
+  ),
+  thu: (
+    3 * ($day-size + $gap),
+  ),
+  fri: (
+    4 * ($day-size + $gap),
+  ),
+  sat: (
+    5 * ($day-size + $gap),
+  ),
+  sun: (
+    6 * ($day-size + $gap),
+  ),
 );
 
-@each $day, $number in $start-day {
+@each $day, $length in $start-day {
   .calendar--start-day-#{$day} .calendar__day:first-child {
-    grid-column-start: $number;
+    margin-left: $length;
   }
 }
 
