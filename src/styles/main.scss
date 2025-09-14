@@ -17,7 +17,7 @@ body {
   flex-direction: row;
   gap: $gap;
   padding: $container-padding;
-  width: calc($day-size * 7 + $gap * 6);
+  width: calc($day-size * 7 + $container-padding - 4 * $gap);
 
   &__day {
     display: flex;
